@@ -7,7 +7,7 @@ import {
   SearchSkeleton,
   EmptyState,
   ErrorState,
-  LoadMoreButton,
+  Pagination,
 } from '@/components/search';
 import { useSearch } from '@/hooks/useSearch';
 import { useKeyboardNavigation } from '@/hooks/useKeyboardNavigation';
@@ -58,13 +58,13 @@ export function SearchContainer() {
     inputValue,
     results,
     total,
-    hasMore,
+    totalPages,
+    currentPage,
     isLoading,
-    isLoadingMore,
     error,
     query,
     setInputValue,
-    loadMore,
+    goToPage,
     clearSearch,
     retry,
   } = useSearch();
@@ -160,7 +160,7 @@ export function SearchContainer() {
               <select
                 value={sortOption}
                 onChange={(e) => setSortOption(e.target.value as typeof sortOption)}
-                className="rounded-lg border border-neutral-200 bg-white px-4 py-2 text-sm font-medium text-neutral-700 focus:border-neutral-900 focus:outline-none focus:ring-1 focus:ring-neutral-900"
+                className="rounded-lg bg-white px-4 py-2 text-sm font-medium text-neutral-700 focus:outline-none"
               >
                 <option value="relevance">Relevance</option>
                 <option value="price_low">Price: Low to High</option>
@@ -184,9 +184,14 @@ export function SearchContainer() {
                 focusedIndex={focusedIndex}
                 onItemHover={setFocusedIndex}
               />
-              {hasMore && (
-                <div className="mt-12 flex justify-center">
-                  <LoadMoreButton onClick={loadMore} isLoading={isLoadingMore} />
+              {totalPages > 1 && (
+                <div className="mt-12">
+                  <Pagination
+                    currentPage={currentPage}
+                    totalPages={totalPages}
+                    onPageChange={goToPage}
+                    isLoading={isLoading}
+                  />
                 </div>
               )}
             </>
