@@ -8,7 +8,6 @@ import { searchCache } from "@/lib/cache/searchCache";
 import type {
   SearchState,
   SearchAction,
-  Product,
 } from "@/types/search";
 import { SEARCH_CONFIG } from "@/constants/search";
 
@@ -26,9 +25,10 @@ function searchReducer(state: SearchState, action: SearchAction): SearchState {
   switch (action.type) {
     case "SEARCH_START":
       return {
-        ...initialState,
+        ...state,
         query: action.query,
         isLoading: true,
+        error: null,
       };
     case "SEARCH_SUCCESS":
       return {
@@ -62,6 +62,7 @@ export function useSearch() {
 
   const abortControllerRef = useRef<AbortController | null>(null);
   const isInitializedRef = useRef(false);
+  const lastSearchedQueryRef = useRef("");
 
   const searchParams = useSearchParams();
   const pathname = usePathname();
@@ -69,18 +70,13 @@ export function useSearch() {
 
   const updateURL = useCallback(
     (query: string, page: number) => {
-      const params = new URLSearchParams(searchParams.toString());
+      const params = new URLSearchParams();
 
       if (query) {
         params.set("q", query);
         if (page > 1) {
           params.set("page", page.toString());
-        } else {
-          params.delete("page");
         }
-      } else {
-        params.delete("q");
-        params.delete("page");
       }
 
       const newUrl = params.toString()
@@ -88,7 +84,7 @@ export function useSearch() {
         : pathname;
       router.replace(newUrl, { scroll: false });
     },
-    [pathname, router, searchParams]
+    [pathname, router]
   );
 
   const performSearch = useCallback(
@@ -162,6 +158,7 @@ export function useSearch() {
 
     if (urlQuery) {
       setInputValue(urlQuery);
+      lastSearchedQueryRef.current = urlQuery;
       // Check cache first
       const cached = searchCache.get(urlQuery, urlPage);
       if (cached) {
@@ -172,16 +169,23 @@ export function useSearch() {
     }
   }, [searchParams, performSearch]);
 
-  // Perform search when debounced query changes
+  // Perform search when debounced query changes (only for NEW queries, not page changes)
   useEffect(() => {
     // Skip on initial mount (handled by URL sync above)
     if (!isInitializedRef.current) return;
 
+    // Skip if query hasn't actually changed (prevents re-running on page changes)
+    if (debouncedQuery === lastSearchedQueryRef.current) return;
+
     if (!debouncedQuery.trim()) {
       dispatch({ type: "CLEAR_SEARCH" });
       updateURL("", 1);
+      lastSearchedQueryRef.current = "";
       return;
     }
+
+    // Update the ref to track this query
+    lastSearchedQueryRef.current = debouncedQuery;
 
     // Reset to page 1 when query changes
     performSearch(debouncedQuery, 1);
@@ -198,6 +202,7 @@ export function useSearch() {
 
   const clearSearch = useCallback(() => {
     setInputValue("");
+    lastSearchedQueryRef.current = "";
     dispatch({ type: "CLEAR_SEARCH" });
     updateURL("", 1);
   }, [updateURL]);
