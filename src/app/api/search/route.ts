@@ -14,9 +14,9 @@ function generateMockProducts(query: string, page: number, limit: number): Produ
   const lowerQuery = query.toLowerCase();
   const startIndex = (page - 1) * limit;
 
-  // Create a seed based on query for consistent results
+  // Create a seed based on query for consistent results across all pages
   const seed = lowerQuery.split('').reduce((acc, char) => acc + char.charCodeAt(0), 0);
-  const random = seededRandom(seed + page);
+  const random = seededRandom(seed);
 
   const allProducts: Product[] = [];
 

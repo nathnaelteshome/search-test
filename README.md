@@ -5,6 +5,7 @@ A production-quality search interface built with Next.js 14+, TypeScript, and Ta
 ## Features
 
 ### Core Features
+
 - **Real-time Search**: Debounced search input (500ms) for smooth UX
 - **Pagination**: "Load More" button for infinite-scroll-like pagination
 - **Loading States**: Skeleton loaders during initial search and pagination
@@ -13,6 +14,7 @@ A production-quality search interface built with Next.js 14+, TypeScript, and Ta
 - **Search Caching**: In-memory LRU cache prevents redundant API calls
 
 ### Bonus Features
+
 - **URL State Sync**: Query and page are synced with URL parameters
 - **Keyboard Navigation**: Arrow keys to navigate, Enter to select, Escape to clear
 - **Request Cancellation**: AbortController cancels pending requests on new search
@@ -27,23 +29,27 @@ A production-quality search interface built with Next.js 14+, TypeScript, and Ta
 ## Getting Started
 
 ### Prerequisites
+
 - Node.js 18+
 - npm or yarn
 
 ### Installation
 
 1. Clone the repository:
+
 ```bash
 git clone <repository-url>
 cd test-project1
 ```
 
 2. Install dependencies:
+
 ```bash
 npm install
 ```
 
 3. Run the development server:
+
 ```bash
 npm run dev
 ```
@@ -88,22 +94,26 @@ src/
 ## Architecture Decisions
 
 ### State Management
+
 - **useReducer** over useState for complex state transitions
 - **Local state** instead of Context (search is self-contained)
 - **URL as source of truth** for query and pagination state
 
 ### Race Condition Handling
+
 1. AbortController cancels pending requests when a new search starts
 2. Debouncing reduces request frequency
 3. State updates ignore stale responses
 
 ### Caching Strategy
+
 - In-memory LRU cache with 5-minute TTL
 - Cache key format: `{query}:{page}`
 - Maximum 50 cached entries
 - Cache checked before API calls
 
 ### Error Handling
+
 - Route-level error boundary (`search/error.tsx`)
 - Global error boundary (`global-error.tsx`)
 - Component-level error state with retry button
@@ -112,12 +122,14 @@ src/
 ## Mock API
 
 The mock API (`/api/search`) simulates real-world behavior:
+
 - **1-2 second delay** for realistic loading states
 - **5% random error rate** for testing error handling
 - **Seeded random** for consistent results per query
 - **Pagination support** with `hasMore` flag
 
 ### API Response Format
+
 ```typescript
 {
   results: Product[],
@@ -136,13 +148,3 @@ npm run build    # Build for production
 npm run start    # Start production server
 npm run lint     # Run ESLint
 ```
-
-## What I'd Improve With More Time
-
-1. **Testing**: Add Jest/React Testing Library tests for hooks and components
-2. **Virtualization**: Implement virtual scrolling for very large result sets
-3. **Filters**: Add category, price range, and rating filters
-4. **Sorting**: Add sort options (relevance, price, rating)
-5. **Accessibility**: Enhanced screen reader support and ARIA labels
-6. **Analytics**: Track search queries and user interactions
-7. **Offline Support**: Service worker for offline functionality

@@ -27,6 +27,11 @@ export const PRODUCT_NAMES = {
     "Laptop Stand",
     "Power Bank 20000mAh",
     "USB Microphone",
+    "Smart TV 55 inch",
+    "Tablet 10 inch",
+    "E-Reader Device",
+    "Mini Projector",
+    "Wireless Keyboard",
   ],
   Accessories: [
     "Phone Case Premium",
@@ -39,6 +44,11 @@ export const PRODUCT_NAMES = {
     "Monitor Light Bar",
     "Desk Mat XL",
     "Phone Stand Adjustable",
+    "Laptop Cooling Pad",
+    "Wireless Charger Stand",
+    "AirTag Wallet Holder",
+    "Cable Management Box",
+    "Tablet Stylus Pen",
   ],
   Audio: [
     "True Wireless Earbuds",
@@ -51,6 +61,11 @@ export const PRODUCT_NAMES = {
     "Earphone Case",
     "Audio Splitter",
     "Microphone Arm Stand",
+    "Portable DAP Player",
+    "Bone Conduction Headphones",
+    "Karaoke Microphone",
+    "Audio Interface USB",
+    "Turntable Vinyl Player",
   ],
   Wearables: [
     "Smartwatch Pro",
@@ -63,6 +78,11 @@ export const PRODUCT_NAMES = {
     "Sleep Tracker",
     "Posture Corrector Smart",
     "UV Monitor Band",
+    "GPS Running Watch",
+    "Smart Belt Buckle",
+    "Wearable Air Purifier",
+    "Clip-On Fitness Tracker",
+    "Smart Bracelet Medical",
   ],
   Gaming: [
     "Gaming Mouse RGB",
@@ -75,6 +95,11 @@ export const PRODUCT_NAMES = {
     "Controller Grip Kit",
     "Gaming Chair",
     "RGB Light Strip",
+    "Racing Wheel Set",
+    "VR Controllers Pair",
+    "Gaming Monitor 144Hz",
+    "Arcade Fight Stick",
+    "Console Cooling Stand",
   ],
   "Home & Office": [
     "Smart Plug WiFi",
@@ -87,6 +112,11 @@ export const PRODUCT_NAMES = {
     "Label Maker",
     "Document Scanner",
     "Ergonomic Footrest",
+    "Standing Desk Converter",
+    "Wireless Presenter Remote",
+    "USB Desk Fan",
+    "Whiteboard Magnetic",
+    "Desk Organizer Set",
   ],
 } as const;
 
@@ -113,6 +143,16 @@ export const PRODUCT_IMAGES: Record<string, Record<string, string>> = {
       "https://images.unsplash.com/photo-1609091839311-d5365f9ff1c5?w=400&h=400&fit=crop",
     "USB Microphone":
       "https://images.unsplash.com/photo-1590602847861-f357a9332bbc?w=400&h=400&fit=crop",
+    "Smart TV 55 inch":
+      "https://images.unsplash.com/photo-1593359677879-a4bb92f829d1?w=400&h=400&fit=crop",
+    "Tablet 10 inch":
+      "https://images.unsplash.com/photo-1544244015-0df4b3ffc6b0?w=400&h=400&fit=crop",
+    "E-Reader Device":
+      "https://images.unsplash.com/photo-1507842217343-583bb7270b66?w=400&h=400&fit=crop",
+    "Mini Projector":
+      "https://images.unsplash.com/photo-1478720568477-152d9b164e26?w=400&h=400&fit=crop",
+    "Wireless Keyboard":
+      "https://images.unsplash.com/photo-1587829741301-dc798b83add3?w=400&h=400&fit=crop",
   },
   Accessories: {
     "Phone Case Premium":
@@ -135,6 +175,16 @@ export const PRODUCT_IMAGES: Record<string, Record<string, string>> = {
       "https://images.unsplash.com/photo-1616628188859-7a11abb6fcc9?w=400&h=400&fit=crop",
     "Phone Stand Adjustable":
       "https://images.unsplash.com/photo-1586953208448-b95a79798f07?w=400&h=400&fit=crop",
+    "Laptop Cooling Pad":
+      "https://images.unsplash.com/photo-1527443224154-c4a3942d3acf?w=400&h=400&fit=crop",
+    "Wireless Charger Stand":
+      "https://images.unsplash.com/photo-1586816879360-004f5b0c51e5?w=400&h=400&fit=crop",
+    "AirTag Wallet Holder":
+      "https://images.unsplash.com/photo-1627123424574-724758594e93?w=400&h=400&fit=crop",
+    "Cable Management Box":
+      "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=400&h=400&fit=crop",
+    "Tablet Stylus Pen":
+      "https://images.unsplash.com/photo-1585336261022-680e295ce3fe?w=400&h=400&fit=crop",
   },
   Audio: {
     "True Wireless Earbuds":
@@ -157,6 +207,16 @@ export const PRODUCT_IMAGES: Record<string, Record<string, string>> = {
       "https://images.unsplash.com/photo-1558618047-3c8c76ca6392?w=400&h=400&fit=crop",
     "Microphone Arm Stand":
       "https://images.unsplash.com/photo-1590765773150-b02d23d8d0f2?w=400&h=400&fit=crop",
+    "Portable DAP Player":
+      "https://images.unsplash.com/photo-1558618047-f4b511d59d68?w=400&h=400&fit=crop",
+    "Bone Conduction Headphones":
+      "https://images.unsplash.com/photo-1613040809024-b4ef7ba99bc3?w=400&h=400&fit=crop",
+    "Karaoke Microphone":
+      "https://images.unsplash.com/photo-1478737270239-2f02b77fc618?w=400&h=400&fit=crop",
+    "Audio Interface USB":
+      "https://images.unsplash.com/photo-1598550476439-6847785fcea6?w=400&h=400&fit=crop",
+    "Turntable Vinyl Player":
+      "https://images.unsplash.com/photo-1539375665275-f9de415ef9ac?w=400&h=400&fit=crop",
   },
   Wearables: {
     "Smartwatch Pro":
@@ -179,6 +239,16 @@ export const PRODUCT_IMAGES: Record<string, Record<string, string>> = {
       "https://images.unsplash.com/photo-1576243345690-4e4b79b63288?w=400&h=400&fit=crop",
     "UV Monitor Band":
       "https://images.unsplash.com/photo-1557438159-51eec7a6c9e8?w=400&h=400&fit=crop",
+    "GPS Running Watch":
+      "https://images.unsplash.com/photo-1510017803434-a899398421b3?w=400&h=400&fit=crop",
+    "Smart Belt Buckle":
+      "https://images.unsplash.com/photo-1624526267942-ab0ff8a3e972?w=400&h=400&fit=crop",
+    "Wearable Air Purifier":
+      "https://images.unsplash.com/photo-1585771724684-38269d6639fd?w=400&h=400&fit=crop",
+    "Clip-On Fitness Tracker":
+      "https://images.unsplash.com/photo-1576243345690-4e4b79b63288?w=400&h=400&fit=crop",
+    "Smart Bracelet Medical":
+      "https://images.unsplash.com/photo-1579586337278-3befd40fd17a?w=400&h=400&fit=crop",
   },
   Gaming: {
     "Gaming Mouse RGB":
@@ -201,6 +271,16 @@ export const PRODUCT_IMAGES: Record<string, Record<string, string>> = {
       "https://images.unsplash.com/photo-1598550476439-6847785fcea6?w=400&h=400&fit=crop",
     "RGB Light Strip":
       "https://images.unsplash.com/photo-1550745165-9bc0b252726f?w=400&h=400&fit=crop",
+    "Racing Wheel Set":
+      "https://images.unsplash.com/photo-1511882150382-421056c89033?w=400&h=400&fit=crop",
+    "VR Controllers Pair":
+      "https://images.unsplash.com/photo-1622979135225-d2ba269cf1ac?w=400&h=400&fit=crop",
+    "Gaming Monitor 144Hz":
+      "https://images.unsplash.com/photo-1527443224154-c4a3942d3acf?w=400&h=400&fit=crop",
+    "Arcade Fight Stick":
+      "https://images.unsplash.com/photo-1612287230202-1ff1d85d1bdf?w=400&h=400&fit=crop",
+    "Console Cooling Stand":
+      "https://images.unsplash.com/photo-1606144042614-b2417e99c4e3?w=400&h=400&fit=crop",
   },
   "Home & Office": {
     "Smart Plug WiFi":
@@ -223,6 +303,16 @@ export const PRODUCT_IMAGES: Record<string, Record<string, string>> = {
       "https://images.unsplash.com/photo-1612815154858-60aa4c59eaa6?w=400&h=400&fit=crop",
     "Ergonomic Footrest":
       "https://images.unsplash.com/photo-1555041469-a586c61ea9bc?w=400&h=400&fit=crop",
+    "Standing Desk Converter":
+      "https://images.unsplash.com/photo-1593062096033-9a26b09da705?w=400&h=400&fit=crop",
+    "Wireless Presenter Remote":
+      "https://images.unsplash.com/photo-1586339949216-35c2747cc36d?w=400&h=400&fit=crop",
+    "USB Desk Fan":
+      "https://images.unsplash.com/photo-1617375534766-e8d14f9d4a3e?w=400&h=400&fit=crop",
+    "Whiteboard Magnetic":
+      "https://images.unsplash.com/photo-1532619675605-1ede6c2ed2b0?w=400&h=400&fit=crop",
+    "Desk Organizer Set":
+      "https://images.unsplash.com/photo-1544816155-12df9643f363?w=400&h=400&fit=crop",
   },
 };
 
@@ -307,6 +397,41 @@ export const PRODUCT_DATA: Record<string, Record<string, ProductData>> = {
       description:
         "Professional USB condenser microphone with cardioid pickup pattern, zero-latency monitoring, and tap-to-mute. Perfect for podcasting, streaming, and voice-overs.",
     },
+    "Smart TV 55 inch": {
+      price: 549.99,
+      rating: 4.6,
+      inStock: true,
+      description:
+        "55-inch 4K QLED Smart TV with Dolby Vision, HDR10+, and 120Hz refresh rate. Built-in streaming apps, voice control, and gaming mode with VRR support.",
+    },
+    "Tablet 10 inch": {
+      price: 329.99,
+      rating: 4.5,
+      inStock: true,
+      description:
+        "10.1-inch tablet with 2K display, octa-core processor, and 128GB storage. Features stylus support, split-screen multitasking, and 12-hour battery life.",
+    },
+    "E-Reader Device": {
+      price: 139.99,
+      rating: 4.7,
+      inStock: true,
+      description:
+        "6.8-inch e-reader with 300 PPI display, adjustable warm light, and waterproof design. Holds thousands of books with weeks of battery life.",
+    },
+    "Mini Projector": {
+      price: 199.99,
+      rating: 4.3,
+      inStock: true,
+      description:
+        "Portable mini projector with 1080p native resolution, built-in speakers, and wireless screen mirroring. Projects up to 120 inches with auto keystone correction.",
+    },
+    "Wireless Keyboard": {
+      price: 69.99,
+      rating: 4.4,
+      inStock: true,
+      description:
+        "Slim wireless keyboard with Bluetooth and USB receiver, backlit keys, and multi-device pairing. Rechargeable battery lasts up to 3 months.",
+    },
   },
   Accessories: {
     "Phone Case Premium": {
@@ -378,6 +503,41 @@ export const PRODUCT_DATA: Record<string, Record<string, ProductData>> = {
       inStock: true,
       description:
         'Foldable aluminum phone/tablet stand with adjustable viewing angles and anti-scratch silicone pads. Supports devices from 4" to 13". Compact for travel.',
+    },
+    "Laptop Cooling Pad": {
+      price: 39.99,
+      rating: 4.4,
+      inStock: true,
+      description:
+        "Laptop cooling pad with 5 quiet fans, adjustable height settings, and RGB lighting. Fits laptops up to 17 inches with dual USB ports for passthrough.",
+    },
+    "Wireless Charger Stand": {
+      price: 44.99,
+      rating: 4.5,
+      inStock: true,
+      description:
+        "3-in-1 wireless charger stand for phone, watch, and earbuds. 15W fast charging with LED indicator and compact folding design for travel.",
+    },
+    "AirTag Wallet Holder": {
+      price: 19.99,
+      rating: 4.2,
+      inStock: true,
+      description:
+        "Slim AirTag wallet card holder that fits in any standard wallet. Protective case prevents scratches while allowing full Bluetooth tracking functionality.",
+    },
+    "Cable Management Box": {
+      price: 24.99,
+      rating: 4.3,
+      inStock: true,
+      description:
+        "Large cable management box with ventilation slots, cord openings, and non-slip base. Hides power strips and cables for a clean desk setup.",
+    },
+    "Tablet Stylus Pen": {
+      price: 49.99,
+      rating: 4.5,
+      inStock: false,
+      description:
+        "Active stylus pen with palm rejection, tilt sensitivity, and magnetic attachment. 4096 pressure levels for precise drawing and note-taking on compatible tablets.",
     },
   },
   Audio: {
@@ -451,6 +611,41 @@ export const PRODUCT_DATA: Record<string, Record<string, ProductData>> = {
       description:
         'Heavy-duty microphone boom arm with internal cable routing, 360° rotation, and desk clamp. Supports microphones up to 4 lbs. Includes 3/8" and 5/8" adapters.',
     },
+    "Portable DAP Player": {
+      price: 299.99,
+      rating: 4.6,
+      inStock: true,
+      description:
+        "High-resolution digital audio player with dual DAC chips, balanced output, and 256GB storage. Supports MQA, DSD, and all lossless formats with 15-hour battery.",
+    },
+    "Bone Conduction Headphones": {
+      price: 129.99,
+      rating: 4.3,
+      inStock: true,
+      description:
+        "Open-ear bone conduction headphones with IP68 waterproof rating and 8-hour battery. Perfect for running and cycling with situational awareness.",
+    },
+    "Karaoke Microphone": {
+      price: 39.99,
+      rating: 4.2,
+      inStock: true,
+      description:
+        "Wireless karaoke microphone with built-in Bluetooth speaker, echo control, and LED lights. Connects to any device for instant sing-along fun.",
+    },
+    "Audio Interface USB": {
+      price: 149.99,
+      rating: 4.7,
+      inStock: true,
+      description:
+        "2-channel USB audio interface with studio-quality preamps, 24-bit/192kHz recording, and zero-latency monitoring. Includes DAW software bundle.",
+    },
+    "Turntable Vinyl Player": {
+      price: 249.99,
+      rating: 4.5,
+      inStock: false,
+      description:
+        "Belt-drive turntable with built-in phono preamp, USB output for digitizing records, and Audio-Technica cartridge. Three-speed playback with auto-stop.",
+    },
   },
   Wearables: {
     "Smartwatch Pro": {
@@ -522,6 +717,41 @@ export const PRODUCT_DATA: Record<string, Record<string, ProductData>> = {
       inStock: true,
       description:
         "Wearable UV exposure tracker that alerts when you need sunscreen. Measures vitamin D synthesis and sun damage risk. Waterproof with 6-month battery.",
+    },
+    "GPS Running Watch": {
+      price: 249.99,
+      rating: 4.6,
+      inStock: true,
+      description:
+        "Advanced GPS running watch with multi-band positioning, running dynamics, and training load analysis. 14-day battery life with always-on display.",
+    },
+    "Smart Belt Buckle": {
+      price: 79.99,
+      rating: 4.0,
+      inStock: true,
+      description:
+        "Smart belt buckle with step tracking, posture monitoring, and waist measurement. Syncs with health apps and features discreet vibration alerts.",
+    },
+    "Wearable Air Purifier": {
+      price: 99.99,
+      rating: 4.1,
+      inStock: true,
+      description:
+        "Personal wearable air purifier necklace with HEPA filter and negative ion generator. USB rechargeable with 8-hour runtime. Filters PM2.5 and allergens.",
+    },
+    "Clip-On Fitness Tracker": {
+      price: 34.99,
+      rating: 4.2,
+      inStock: true,
+      description:
+        "Discreet clip-on fitness tracker for steps, distance, and calories. 6-month battery life with silent alarm and automatic sleep tracking.",
+    },
+    "Smart Bracelet Medical": {
+      price: 179.99,
+      rating: 4.4,
+      inStock: false,
+      description:
+        "Medical-grade smart bracelet with fall detection, SOS button, and continuous vitals monitoring. GPS tracking for caregivers with medication reminders.",
     },
   },
   Gaming: {
@@ -595,6 +825,41 @@ export const PRODUCT_DATA: Record<string, Record<string, ProductData>> = {
       description:
         "2-meter RGB light strip with 16 million colors, music sync mode, and app control. Adhesive backing for easy installation. Works with voice assistants.",
     },
+    "Racing Wheel Set": {
+      price: 299.99,
+      rating: 4.6,
+      inStock: true,
+      description:
+        "Force feedback racing wheel with pedals and shifter. 900° rotation with leather-wrapped rim. Compatible with PC, PlayStation, and Xbox.",
+    },
+    "VR Controllers Pair": {
+      price: 149.99,
+      rating: 4.5,
+      inStock: true,
+      description:
+        "Precision VR controllers with finger tracking, haptic feedback, and ergonomic grip. Rechargeable batteries with 30-hour playtime per charge.",
+    },
+    "Gaming Monitor 144Hz": {
+      price: 349.99,
+      rating: 4.7,
+      inStock: true,
+      description:
+        "27-inch QHD gaming monitor with 144Hz refresh rate, 1ms response time, and G-Sync/FreeSync. IPS panel with 95% DCI-P3 color coverage.",
+    },
+    "Arcade Fight Stick": {
+      price: 199.99,
+      rating: 4.4,
+      inStock: false,
+      description:
+        "Tournament-grade arcade fight stick with Sanwa buttons and joystick. Customizable with easy mod access. Works with PC and all major consoles.",
+    },
+    "Console Cooling Stand": {
+      price: 39.99,
+      rating: 4.2,
+      inStock: true,
+      description:
+        "Vertical cooling stand for gaming consoles with dual fans, controller charging dock, and game disc storage. LED indicators show charging status.",
+    },
   },
   "Home & Office": {
     "Smart Plug WiFi": {
@@ -666,6 +931,41 @@ export const PRODUCT_DATA: Record<string, Record<string, ProductData>> = {
       inStock: true,
       description:
         "Adjustable ergonomic footrest with massage texture surface, tilt function, and anti-slip base. Improves posture and circulation during long sitting hours.",
+    },
+    "Standing Desk Converter": {
+      price: 279.99,
+      rating: 4.5,
+      inStock: true,
+      description:
+        "Height-adjustable standing desk converter with spacious work surface, keyboard tray, and smooth pneumatic lift. Converts any desk to sit-stand in seconds.",
+    },
+    "Wireless Presenter Remote": {
+      price: 34.99,
+      rating: 4.3,
+      inStock: true,
+      description:
+        "Professional wireless presenter with laser pointer, 100ft range, and intuitive controls. Features volume buttons and timer with vibration alerts.",
+    },
+    "USB Desk Fan": {
+      price: 24.99,
+      rating: 4.2,
+      inStock: true,
+      description:
+        "Quiet USB-powered desk fan with 3 speed settings, 360° rotation, and strong airflow. Compact design with rubber base prevents sliding.",
+    },
+    "Whiteboard Magnetic": {
+      price: 89.99,
+      rating: 4.4,
+      inStock: false,
+      description:
+        "Large magnetic dry-erase whiteboard with aluminum frame, detachable marker tray, and mounting hardware. Ghost-resistant surface erases cleanly.",
+    },
+    "Desk Organizer Set": {
+      price: 32.99,
+      rating: 4.3,
+      inStock: true,
+      description:
+        "5-piece mesh desk organizer set including file sorter, pen holder, letter tray, sticky note holder, and business card holder. Black powder-coated steel.",
     },
   },
 };

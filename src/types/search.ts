@@ -28,21 +28,17 @@ export interface SearchState {
   results: Product[];
   page: number;
   total: number;
-  hasMore: boolean;
+  totalPages: number;
   isLoading: boolean;
-  isLoadingMore: boolean;
   error: SearchError | null;
 }
 
 export type SearchAction =
-  | { type: 'SEARCH_START'; query: string }
-  | { type: 'SEARCH_SUCCESS'; payload: SearchResponse }
-  | { type: 'SEARCH_ERROR'; error: SearchError }
-  | { type: 'LOAD_MORE_START' }
-  | { type: 'LOAD_MORE_SUCCESS'; payload: SearchResponse }
-  | { type: 'LOAD_MORE_ERROR'; error: SearchError }
-  | { type: 'CLEAR_SEARCH' }
-  | { type: 'RESTORE_FROM_CACHE'; payload: SearchState };
+  | { type: "SEARCH_START"; query: string }
+  | { type: "SEARCH_SUCCESS"; payload: SearchResponse }
+  | { type: "SEARCH_ERROR"; error: SearchError }
+  | { type: "CLEAR_SEARCH" }
+  | { type: "RESTORE_FROM_CACHE"; payload: SearchState };
 
 export interface ApiResponse<T> {
   data: T | null;

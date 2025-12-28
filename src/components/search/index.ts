@@ -5,6 +5,7 @@ export { SearchSkeleton } from './SearchSkeleton';
 export { EmptyState } from './EmptyState';
 export { ErrorState } from './ErrorState';
 export { LoadMoreButton } from './LoadMoreButton';
+export { Pagination } from './Pagination';
 export { FilterSidebar } from './FilterSidebar';
 export { SortDropdown } from './SortDropdown';
 export { ViewToggle } from './ViewToggle';
