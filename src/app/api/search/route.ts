@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import type { SearchResponse, Product } from '@/types/search';
-import { PRODUCT_CATEGORIES, PRODUCT_NAMES } from '@/constants/search';
+import { PRODUCT_CATEGORIES, PRODUCT_NAMES, PRODUCT_IMAGES, PRODUCT_DATA } from '@/constants/search';
 
 // Seeded random for consistent results
 function seededRandom(seed: number): () => number {
@@ -29,17 +29,17 @@ function generateMockProducts(query: string, page: number, limit: number): Produ
 
       // Match if query is in product name or category
       if (productLower.includes(lowerQuery) || categoryLower.includes(lowerQuery) || lowerQuery.length <= 2) {
-        const productSeed = seededRandom(seed + productIndex + PRODUCT_CATEGORIES.indexOf(category) * 100);
+        const productData = PRODUCT_DATA[category]?.[productName];
 
         allProducts.push({
           id: `product-${category}-${productIndex}`,
           name: productName,
-          description: `High-quality ${productName.toLowerCase()} with premium features. Perfect for ${category.toLowerCase()} enthusiasts. This product offers excellent value and reliability for everyday use.`,
-          price: Math.round((productSeed() * 500 + 19.99) * 100) / 100,
+          description: productData?.description || `High-quality ${productName.toLowerCase()} with premium features. Perfect for ${category.toLowerCase()} enthusiasts.`,
+          price: productData?.price || 49.99,
           category,
-          image: `/api/placeholder/${300 + (productIndex % 10) * 10}/${300 + (productIndex % 10) * 10}`,
-          rating: Math.round((productSeed() * 2 + 3) * 10) / 10,
-          inStock: productSeed() > 0.2,
+          image: PRODUCT_IMAGES[category]?.[productName] || `https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=400&h=400&fit=crop`,
+          rating: productData?.rating || 4.0,
+          inStock: productData?.inStock ?? true,
         });
       }
     });
@@ -76,11 +76,58 @@ function delay(ms: number): Promise<void> {
   return new Promise((resolve) => setTimeout(resolve, ms));
 }
 
+function getProductById(id: string): Product | null {
+  // Parse the ID format: product-{category}-{index}
+  const parts = id.split('-');
+  if (parts.length < 3) return null;
+
+  const category = parts.slice(1, -1).join('-');
+  const productIndex = parseInt(parts[parts.length - 1], 10);
+
+  // Find matching category (case-insensitive)
+  const matchedCategory = PRODUCT_CATEGORIES.find(
+    (c) => c.toLowerCase() === category.toLowerCase()
+  );
+
+  if (!matchedCategory) return null;
+
+  const categoryProducts = PRODUCT_NAMES[matchedCategory];
+  if (productIndex < 0 || productIndex >= categoryProducts.length) return null;
+
+  const productName = categoryProducts[productIndex];
+  const productData = PRODUCT_DATA[matchedCategory]?.[productName];
+
+  return {
+    id,
+    name: productName,
+    description: productData?.description || `High-quality ${productName.toLowerCase()} with premium features. Perfect for ${matchedCategory.toLowerCase()} enthusiasts.`,
+    price: productData?.price || 49.99,
+    category: matchedCategory,
+    image: PRODUCT_IMAGES[matchedCategory]?.[productName] || `https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=400&h=400&fit=crop`,
+    rating: productData?.rating || 4.0,
+    inStock: productData?.inStock ?? true,
+  };
+}
+
 export async function GET(request: NextRequest) {
   const searchParams = request.nextUrl.searchParams;
   const query = searchParams.get('q') || '';
+  const productId = searchParams.get('id');
   const page = parseInt(searchParams.get('page') || '1', 10);
   const limit = parseInt(searchParams.get('limit') || '10', 10);
+
+  // Handle single product fetch
+  if (productId) {
+    await delay(500);
+    const product = getProductById(productId);
+    if (product) {
+      return NextResponse.json({ product });
+    }
+    return NextResponse.json(
+      { error: { message: 'Product not found', code: 'NOT_FOUND', status: 404 } },
+      { status: 404 }
+    );
+  }
 
   // Validate parameters
   if (!query.trim()) {

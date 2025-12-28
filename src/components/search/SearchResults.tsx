@@ -6,25 +6,27 @@ import type { Product } from '@/types/search';
 interface SearchResultsProps {
   results: Product[];
   focusedIndex: number;
-  onItemClick: (index: number) => void;
   onItemHover: (index: number) => void;
 }
 
 export function SearchResults({
   results,
   focusedIndex,
-  onItemClick,
   onItemHover,
 }: SearchResultsProps) {
   return (
-    <div className="space-y-3" role="listbox" aria-label="Search results">
+    <div
+      className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4"
+      role="listbox"
+      aria-label="Search results"
+    >
       {results.map((product, index) => (
         <ProductCard
           key={product.id}
           product={product}
           isFocused={index === focusedIndex}
-          onClick={() => onItemClick(index)}
           onMouseEnter={() => onItemHover(index)}
+          index={index}
         />
       ))}
     </div>

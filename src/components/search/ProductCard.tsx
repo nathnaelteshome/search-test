@@ -1,18 +1,21 @@
 'use client';
 
+import { useState } from 'react';
+import Link from 'next/link';
+import Image from 'next/image';
 import type { Product } from '@/types/search';
 
 interface ProductCardProps {
   product: Product;
   isFocused: boolean;
-  onClick: () => void;
   onMouseEnter: () => void;
+  index?: number;
 }
 
 function StarIcon({ filled }: { filled: boolean }) {
   return (
     <svg
-      className={`h-4 w-4 ${filled ? 'text-amber-400' : 'text-neutral-200'}`}
+      className={`h-3.5 w-3.5 ${filled ? 'text-neutral-900' : 'text-neutral-200'}`}
       fill="currentColor"
       viewBox="0 0 20 20"
     >
@@ -21,80 +24,89 @@ function StarIcon({ filled }: { filled: boolean }) {
   );
 }
 
-function RatingStars({ rating }: { rating: number }) {
-  return (
-    <div className="flex items-center gap-0.5">
-      {[1, 2, 3, 4, 5].map((star) => (
-        <StarIcon key={star} filled={star <= Math.round(rating)} />
-      ))}
-      <span className="ml-1.5 text-sm text-neutral-500">{rating.toFixed(1)}</span>
-    </div>
-  );
-}
+export function ProductCard({ product, isFocused, onMouseEnter, index = 0 }: ProductCardProps) {
+  const [imageLoaded, setImageLoaded] = useState(false);
+  const [imageError, setImageError] = useState(false);
 
-export function ProductCard({ product, isFocused, onClick, onMouseEnter }: ProductCardProps) {
   return (
-    <article
-      role="option"
-      aria-selected={isFocused}
-      className={`group cursor-pointer rounded-xl border bg-white p-5 shadow-sm transition-all duration-200 ${
-        isFocused
-          ? 'border-neutral-400 ring-2 ring-neutral-200'
-          : 'border-neutral-100 hover:border-neutral-200 hover:shadow-md'
-      }`}
-      onClick={onClick}
-      onMouseEnter={onMouseEnter}
-    >
-      <div className="flex gap-4">
-        {/* Product Image Placeholder */}
-        <div className="h-24 w-24 flex-shrink-0 rounded-lg bg-gradient-to-br from-neutral-100 to-neutral-50 flex items-center justify-center">
-          <svg
-            className="h-10 w-10 text-neutral-300"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-            strokeWidth={1.5}
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              d="M20.25 7.5l-.625 10.632a2.25 2.25 0 01-2.247 2.118H6.622a2.25 2.25 0 01-2.247-2.118L3.75 7.5M10 11.25h4M3.375 7.5h17.25c.621 0 1.125-.504 1.125-1.125v-1.5c0-.621-.504-1.125-1.125-1.125H3.375c-.621 0-1.125.504-1.125 1.125v1.5c0 .621.504 1.125 1.125 1.125z"
-            />
-          </svg>
+    <Link href={`/search/${product.id}`}>
+      <article
+        role="option"
+        aria-selected={isFocused}
+        className={`group relative cursor-pointer overflow-hidden rounded-2xl border bg-white transition-all duration-300 animate-fade-in ${
+          isFocused
+            ? 'border-neutral-300 shadow-lg'
+            : 'border-neutral-100 hover:border-neutral-200 hover:shadow-md'
+        }`}
+        style={{ animationDelay: `${index * 50}ms` }}
+        onMouseEnter={onMouseEnter}
+      >
+        {/* Image Container */}
+        <div className="relative aspect-square overflow-hidden bg-neutral-100">
+          {!imageError && product.image ? (
+            <>
+              <Image
+                src={product.image}
+                alt={product.name}
+                fill
+                sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
+                className={`object-cover transition-all duration-500 group-hover:scale-105 ${
+                  imageLoaded ? 'opacity-100' : 'opacity-0'
+                }`}
+                onLoad={() => setImageLoaded(true)}
+                onError={() => setImageError(true)}
+              />
+              {!imageLoaded && (
+                <div className="absolute inset-0 shimmer" />
+              )}
+            </>
+          ) : (
+            <div className="flex h-full w-full items-center justify-center">
+              <svg className="h-16 w-16 text-neutral-300" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1}>
+                <path strokeLinecap="round" strokeLinejoin="round" d="M20.25 7.5l-.625 10.632a2.25 2.25 0 01-2.247 2.118H6.622a2.25 2.25 0 01-2.247-2.118L3.75 7.5M10 11.25h4M3.375 7.5h17.25c.621 0 1.125-.504 1.125-1.125v-1.5c0-.621-.504-1.125-1.125-1.125H3.375c-.621 0-1.125.504-1.125 1.125v1.5c0 .621.504 1.125 1.125 1.125z" />
+              </svg>
+            </div>
+          )}
+
+          {/* Out of Stock Overlay */}
+          {!product.inStock && (
+            <div className="absolute inset-0 flex items-center justify-center bg-white/80 backdrop-blur-sm">
+              <span className="rounded-full bg-neutral-900 px-4 py-1.5 text-sm font-medium text-white">
+                Out of Stock
+              </span>
+            </div>
+          )}
         </div>
 
-        {/* Product Details */}
-        <div className="flex-1 min-w-0">
-          <div className="flex items-start justify-between gap-2">
-            <h3 className="font-semibold text-neutral-900 group-hover:text-neutral-700 transition-colors line-clamp-1">
-              {product.name}
-            </h3>
-            <span
-              className={`flex-shrink-0 rounded-full px-2.5 py-0.5 text-xs font-medium ${
-                product.inStock
-                  ? 'bg-emerald-50 text-emerald-700'
-                  : 'bg-neutral-100 text-neutral-500'
-              }`}
-            >
-              {product.inStock ? 'In Stock' : 'Out of Stock'}
+        {/* Content */}
+        <div className="p-4">
+          <span className="text-xs font-medium uppercase tracking-wide text-neutral-400">
+            {product.category}
+          </span>
+          <h3 className="mt-1 font-medium text-neutral-900 line-clamp-1 group-hover:text-neutral-600 transition-colors">
+            {product.name}
+          </h3>
+
+          {/* Rating */}
+          <div className="mt-2 flex items-center gap-1">
+            <div className="flex">
+              {[1, 2, 3, 4, 5].map((star) => (
+                <StarIcon key={star} filled={star <= Math.round(product.rating)} />
+              ))}
+            </div>
+            <span className="text-xs text-neutral-400">
+              {product.rating.toFixed(1)}
             </span>
           </div>
 
-          <p className="mt-1.5 text-sm text-neutral-500 line-clamp-2">{product.description}</p>
-
-          <div className="mt-3 flex items-center justify-between">
-            <div className="flex items-center gap-3">
-              <span className="text-lg font-bold text-neutral-900">
-                ${product.price.toFixed(2)}
-              </span>
-              <span className="rounded-md bg-neutral-100 px-2 py-0.5 text-xs font-medium text-neutral-600">
-                {product.category}
-              </span>
-            </div>
-            <RatingStars rating={product.rating} />
+          {/* Price */}
+          <div className="mt-3">
+            <span className="text-lg font-semibold text-neutral-900">
+              ${product.price.toFixed(2)}
+            </span>
           </div>
         </div>
-      </div>
-    </article>
+      </article>
+    </Link>
   );
 }

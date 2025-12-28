@@ -7,10 +7,10 @@ interface ErrorStateProps {
 
 export function ErrorState({ error, onRetry }: ErrorStateProps) {
   return (
-    <div className="rounded-xl border border-red-100 bg-red-50 p-8 text-center">
-      <div className="mx-auto mb-4 flex h-14 w-14 items-center justify-center rounded-full bg-red-100">
+    <div className="rounded-xl border border-red-100 bg-red-50 p-8 text-center dark:border-red-900/50 dark:bg-red-900/20">
+      <div className="mx-auto mb-4 flex h-14 w-14 items-center justify-center rounded-full bg-red-100 dark:bg-red-900/50">
         <svg
-          className="h-7 w-7 text-red-600"
+          className="h-7 w-7 text-red-600 dark:text-red-400"
           fill="none"
           viewBox="0 0 24 24"
           stroke="currentColor"
@@ -23,11 +23,11 @@ export function ErrorState({ error, onRetry }: ErrorStateProps) {
           />
         </svg>
       </div>
-      <h3 className="text-lg font-semibold text-red-800">Something went wrong</h3>
-      <p className="mt-2 text-red-600">{error.message}</p>
+      <h3 className="text-lg font-semibold text-red-800 dark:text-red-300">Something went wrong</h3>
+      <p className="mt-2 text-red-600 dark:text-red-400">{error.message}</p>
       <button
         onClick={onRetry}
-        className="mt-5 inline-flex items-center gap-2 rounded-lg bg-red-600 px-5 py-2.5 text-sm font-medium text-white transition-colors hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2"
+        className="mt-5 inline-flex items-center gap-2 rounded-lg bg-red-600 px-5 py-2.5 text-sm font-medium text-white transition-colors hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2 dark:focus:ring-offset-neutral-900"
       >
         <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
           <path
