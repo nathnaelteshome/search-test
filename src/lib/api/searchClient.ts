@@ -52,17 +52,42 @@ class SearchClient {
       clearTimeout(timeoutId);
 
       if (error instanceof Error) {
+        // Check if this was a user-initiated abort (external signal) vs timeout abort
         if (error.name === 'AbortError') {
-          throw error; // Re-throw abort errors to be handled by caller
+          // If controller was aborted by our timeout, treat as timeout
+          if (controller.signal.aborted && !signal?.aborted) {
+            return {
+              data: null,
+              error: {
+                message: 'The search request took too long. Please try again or use a simpler search term.',
+                code: 'TIMEOUT',
+                status: 408,
+              },
+            };
+          }
+          // Otherwise it's a user-initiated abort, re-throw
+          throw error;
         }
 
         if (error.name === 'TimeoutError') {
           return {
             data: null,
             error: {
-              message: 'Request timed out',
+              message: 'The search request took too long. Please try again or use a simpler search term.',
               code: 'TIMEOUT',
               status: 408,
+            },
+          };
+        }
+
+        // Check for common network issues
+        if (error.message.includes('Failed to fetch') || error.message.includes('NetworkError')) {
+          return {
+            data: null,
+            error: {
+              message: 'Unable to connect to the server. Please check your internet connection.',
+              code: 'NETWORK_ERROR',
+              status: 0,
             },
           };
         }
@@ -70,7 +95,7 @@ class SearchClient {
         return {
           data: null,
           error: {
-            message: error.message || 'Network error',
+            message: 'Something went wrong while searching. Please try again.',
             code: 'NETWORK_ERROR',
             status: 0,
           },
@@ -80,7 +105,7 @@ class SearchClient {
       return {
         data: null,
         error: {
-          message: 'Unknown error',
+          message: 'An unexpected error occurred. Please try again.',
           code: 'UNKNOWN_ERROR',
           status: 0,
         },

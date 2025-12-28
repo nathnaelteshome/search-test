@@ -150,9 +150,27 @@ export async function GET(request: NextRequest) {
 
   // Simulate occasional errors for testing (5% chance)
   if (Math.random() < 0.05) {
+    const errorTypes = [
+      {
+        message: 'Our search service is temporarily unavailable. Please try again in a moment.',
+        code: 'SERVICE_UNAVAILABLE',
+        status: 503
+      },
+      {
+        message: 'The search request took too long to process. Please try a simpler search term.',
+        code: 'TIMEOUT',
+        status: 504
+      },
+      {
+        message: 'We encountered an unexpected error while processing your search.',
+        code: 'SERVER_ERROR',
+        status: 500
+      },
+    ];
+    const randomError = errorTypes[Math.floor(Math.random() * errorTypes.length)];
     return NextResponse.json(
-      { error: { message: 'Internal server error', code: 'SERVER_ERROR', status: 500 } },
-      { status: 500 }
+      { error: randomError },
+      { status: randomError.status }
     );
   }
 

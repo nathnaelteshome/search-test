@@ -6,9 +6,8 @@ const createMockSearchState = (overrides: Partial<SearchState> = {}): SearchStat
   results: [],
   page: 1,
   total: 0,
-  hasMore: false,
+  totalPages: 0,
   isLoading: false,
-  isLoadingMore: false,
   error: null,
   ...overrides,
 });
